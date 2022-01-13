@@ -101,7 +101,7 @@ Like_TopN_9
 
 其中的 Like_Limit 算子为类似 Limit 的行为，所实现的逻辑使用以下例子来说明。
 
-当查询语句为 select * from t where a= "a", b>= "dddd" order by a, b asc limit 5; ，索引为 idx(a, b[3]) 时， Like_Limit 根据下面算法决定是否停止从下层 src 获取 rowId ，扫描个数为  cn1 + cn2 + cn3 。
+当查询语句为 select * from t where a= "a", b>= "dddd" order by a, b asc limit 5; ，索引为 idx(a, b[3]) 时， Like_Limit 根据下面算法决定是否停止从下层 src 获取 rowId ，返回个数为  cn1 + cn2 + cn3 。
 
 以下面的数据来举例：
 
