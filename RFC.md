@@ -90,14 +90,16 @@ actRows: 661666
 我们希望能生成如下所示的执行计划：
 
 ```
-TopN_21
-└─IndexLookUp
- └─Like_IndexRangeScan(Build)
- └─Selection_20(Probe)
- └─TableRowIDScan
+Like_TopN_9 
+   └─IndexLookUp_17    
+       └─Like_Limit_16(Build)  
+       │ └─IndexRangeScan_13
+       └─ Selection_15(Probe)
+            └─TableRowIDScan_14
+
 ```
 
-其中的 Like_IndexRangeScan 算子为类似 IndexRangeScan 的行为，所实现的逻辑使用以下例子来说明。
+其中的 Like_Limit 算子为类似 Limit 的行为，所实现的逻辑使用以下例子来说明。
 
 当查询语句为 select * from t where a= "a", b>= "dddd" order by a, b asc limit 5; ，索引为 idx(a, b[3]) 时， Like_IndexRangeScan 算子扫描尽可能多的 rowId ，扫描个数为  cn1 + cn2 + cn3 。
 
